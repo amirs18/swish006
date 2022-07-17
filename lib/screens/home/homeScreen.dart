@@ -1,18 +1,7 @@
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'firebase_options.dart';
 
-void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
-  runApp(MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+class HomeScreen extends StatelessWidget {
+  const HomeScreen({Key? key}) : super(key: key);
 
   static const String _title = 'swish basketball';
 
@@ -23,30 +12,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primaryColor: Colors.orange,
       ),
-      home: const FirstScreen(),
-    );
-  }
-}
-
-class FirstScreen extends StatelessWidget {
-  const FirstScreen({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('First Screen'),
-      ),
-      body: Center(
-        child: ElevatedButton(
-          // Within the `FirstScreen` widget
-          onPressed: () {
-            // Navigate to the second screen using a named route.
-            Navigator.pushNamed(context, '/second');
-          },
-          child: const Text('Launch screen'),
-        ),
-      ),
+      home: const MyStatefulWidget(),
     );
   }
 }
@@ -76,7 +42,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
     Padding(
       padding: EdgeInsets.all(8.0),
       child: Text(
-        'בית, כאן יהיו התרגלים להיום, גרפי התקדמות וכאלה דברים',
+        'בית, כאן יהיו התרגלים להיום, התקדמות וכאלה דברים',
         style: optionStyle,
         textDirection: TextDirection.rtl,
       ),
@@ -92,21 +58,6 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   ];
 
   Future<void> _onItemTapped(int index) async {
-    try {
-      final credential =
-          await FirebaseAuth.instance.createUserWithEmailAndPassword(
-        email: 'amir135246@gmail.com',
-        password: '154fvdf23vs6',
-      );
-    } on FirebaseAuthException catch (e) {
-      if (e.code == 'weak-password') {
-        debugPrint('The password provided is too weak.');
-      } else if (e.code == 'email-already-in-use') {
-        debugPrint('The emailaccount already exists for that email.');
-      }
-    } catch (e) {
-      print(e);
-    }
     setState(() {
       _selectedIndex = index;
     });

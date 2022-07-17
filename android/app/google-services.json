@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "51739115622",
+    "project_id": "swishdb-b2abb",
+    "storage_bucket": "swishdb-b2abb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:51739115622:android:d2f754083e882265e0ada7",
+        "android_client_info": {
+          "package_name": "com.example.swish006"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "51739115622-cr3reb34tdcb0dju8cchah5shdq8nm2e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDl641nkHsdKKNadxpZr8C3yWQTlkVIiNs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "51739115622-cr3reb34tdcb0dju8cchah5shdq8nm2e.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
