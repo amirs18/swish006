@@ -1,30 +1,13 @@
 import 'package:flutter/material.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
-  static const String _title = 'swish basketball';
-
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: _title,
-      theme: ThemeData(
-        primaryColor: Colors.orange,
-      ),
-      home: const MyStatefulWidget(),
-    );
-  }
+  State<HomeScreen> createState() => _MyStatefulWidgetState();
 }
 
-class MyStatefulWidget extends StatefulWidget {
-  const MyStatefulWidget({Key? key}) : super(key: key);
-
-  @override
-  State<MyStatefulWidget> createState() => _MyStatefulWidgetState();
-}
-
-class _MyStatefulWidgetState extends State<MyStatefulWidget> {
+class _MyStatefulWidgetState extends State<HomeScreen> {
   int _selectedIndex = 1;
   static const TextStyle optionStyle = TextStyle(
     fontSize: 30,
