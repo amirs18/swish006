@@ -3,6 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:swish006/screens/auth/LogIn_page.dart';
 import 'package:swish006/screens/auth/Register_page.dart';
+import 'package:swish006/screens/home/homeScreen.dart';
 import 'firebase_options.dart';
 
 void main() async {
@@ -23,6 +24,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
         title: _title,
         theme: ThemeData(
+          appBarTheme: const AppBarTheme(backgroundColor: Colors.orange),
           primaryColor: Colors.orange,
           backgroundColor: Colors.orange,
         ),
@@ -30,7 +32,8 @@ class MyApp extends StatelessWidget {
         routes: {
           '/': (context) => const FirstScreen(),
           '/register': (context) => RegisterPage(),
-          '/login': (context) => LogInPage()
+          '/login': (context) => LogInPage(),
+          '/home': (context) => HomeScreen(),
         });
   }
 }

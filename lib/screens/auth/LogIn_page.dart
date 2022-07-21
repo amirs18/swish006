@@ -60,7 +60,11 @@ class _LogInPageState extends State<LogInPage> {
                   minimumSize: const Size.fromHeight(50), // NEW
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(24))),
-              onPressed: () => auth().signInWithGoogle(),
+              onPressed: () => {
+                auth().signInWithEmail(
+                    emailController.text, passwordController.text),
+                if (true) Navigator.pushNamed(context, '/home')
+              },
               child: const Text(
                 'Submit',
                 style: TextStyle(fontSize: 24),

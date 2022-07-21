@@ -56,10 +56,12 @@ class _RegisterPageState extends State<RegisterPage> {
             ),
             ElevatedButton(
               style: ElevatedButton.styleFrom(
-                primary: Colors.black,
-                minimumSize: const Size.fromHeight(50), // NEW
-              ),
-              onPressed: () => auth().signInWithGoogle(),
+                  primary: Colors.black,
+                  minimumSize: const Size.fromHeight(50), // NEW
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(24))),
+              onPressed: () => auth().registerWithEmail(
+                  emailController.text, passwordController.text),
               child: const Text(
                 'Submit',
                 style: TextStyle(fontSize: 24),
