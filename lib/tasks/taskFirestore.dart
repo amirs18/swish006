@@ -32,4 +32,21 @@ class taskFirestore {
       if (progress != null) "progress": progress
     };
   }
+
+  static Future<String> getdata(String user, String task) async {
+    final db = FirebaseFirestore.instance;
+    final docRef = db
+        .collection("users")
+        .doc(user)
+        .collection("user tasks")
+        .withConverter(
+          fromFirestore: taskFirestore.fromFriestore,
+          toFirestore: (taskFirestore task_firestore, options) =>
+              task_firestore.toFirestore(),
+        )
+        .doc(task);
+    final docSnapshot = await docRef.get();
+    final tf = docSnapshot.data();
+    return tf.toString();
+  }
 }

@@ -53,7 +53,7 @@ class _taskCardState extends State<taskCard> {
             child: const SizedBox(
               width: 300,
               height: 100,
-              child: Text(''),
+              child: Text('taskFirestore.getdata('),
             ),
           ),
         ),
