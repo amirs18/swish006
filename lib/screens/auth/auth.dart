@@ -27,7 +27,7 @@ class auth {
     }
   }
 
-  Future<void> signInWithEmail(String email, String password) async {
+  static Future<User?> signInWithEmail(String email, String password) async {
     try {
       final credential = await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: email, password: password);
@@ -38,6 +38,7 @@ class auth {
         print('Wrong password provided for that user.');
       }
     }
+    return FirebaseAuth.instance.currentUser;
   }
 
 /* 
@@ -69,4 +70,8 @@ class auth {
     // Once signed in, return the UserCredential
     return await FirebaseAuth.instance.signInWithCredential(credential);
   }
+
+  // Future<String> CurrentUser() async {
+  //   UserCredential userCredential = FirebaseAuth.instance;
+  // }
 }

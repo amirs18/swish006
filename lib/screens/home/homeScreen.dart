@@ -50,31 +50,36 @@ class _MyStatefulWidgetState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         backgroundColor: Colors.orange,
         title: const Center(child: Text('SWISH')),
       ),
       body: Center(
         child: _widgetOptions.elementAt(_selectedIndex),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.list),
-            label: 'לוח',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.sports_basketball),
-            label: 'בית',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.school),
-            label: 'תרגילים',
-          ),
-        ],
-        currentIndex: _selectedIndex,
-        selectedItemColor: Colors.deepOrange,
-        onTap: _onItemTapped,
-      ),
+      bottomNavigationBar: btnNavBar(),
+    );
+  }
+
+  BottomNavigationBar btnNavBar() {
+    return BottomNavigationBar(
+      items: const <BottomNavigationBarItem>[
+        BottomNavigationBarItem(
+          icon: Icon(Icons.list),
+          label: 'לוח',
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.sports_basketball),
+          label: 'בית',
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.school),
+          label: 'תרגילים',
+        ),
+      ],
+      currentIndex: _selectedIndex,
+      selectedItemColor: Colors.deepOrange,
+      onTap: _onItemTapped,
     );
   }
 }
