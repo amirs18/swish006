@@ -60,8 +60,13 @@ class _RegisterPageState extends State<RegisterPage> {
                   minimumSize: const Size.fromHeight(50), // NEW
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(24))),
-              onPressed: () => auth().registerWithEmail(
-                  emailController.text, passwordController.text),
+              onPressed: () async {
+                bool b;
+                if (b = await auth().registerWithEmail(
+                    emailController.text, passwordController.text)) {
+                  Navigator.pushNamed(context, '/home');
+                }
+              },
               child: const Text(
                 'Submit',
                 style: TextStyle(fontSize: 24),

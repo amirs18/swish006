@@ -7,15 +7,16 @@ import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class auth {
-  Future<void> registerWithEmail(String email, String password) async {
+  Future<bool> registerWithEmail(String email, String password) async {
     try {
       UserCredential userCredential =
           await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
-
-      print('sssss');
+      if (userCredential != null) {
+        return true;
+      }
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
         print('The password provided is too weak.');
@@ -25,6 +26,7 @@ class auth {
     } catch (e) {
       print(e);
     }
+    return false;
   }
 
   static Future<User?> signInWithEmail(String email, String password) async {
