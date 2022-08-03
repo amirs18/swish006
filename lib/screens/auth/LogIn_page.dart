@@ -1,9 +1,12 @@
 import 'dart:html';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:swish006/screens/auth/auth.dart';
 import 'package:swish006/tasks/taskCard.dart';
+
+import '../../tasks/taskFirestore.dart';
 
 class LogInPage extends StatefulWidget {
   static const String routeName = '/logIn';
@@ -15,10 +18,17 @@ class LogInPage extends StatefulWidget {
 class _LogInPageState extends State<LogInPage> {
   String emailController = "";
   String passwordController = "";
+  static final db = FirebaseFirestore.instance;
+  final city = <String, String>{
+    "name": "Los Angeles",
+    "state": "CA",
+    "country": "USA"
+  };
 
   @override
   Widget build(BuildContext context) {
     User? user;
+    Map<String, String> userEmail;
     return Scaffold(
         appBar: AppBar(
           title: Text('login'),
@@ -63,6 +73,8 @@ class _LogInPageState extends State<LogInPage> {
                   await auth.signInWithEmail(
                       emailController, passwordController),
                   user = FirebaseAuth.instance.currentUser,
+                  userEmail = <String, String>{"name": user!.email.toString()},
+                  db.collection('users').doc(user?.uid).set(userEmail),
                   if (user != null) Navigator.pushNamed(context, '/home')
                 },
                 child: const Text(
@@ -70,7 +82,6 @@ class _LogInPageState extends State<LogInPage> {
                   style: TextStyle(fontSize: 24),
                 ),
               ),
-              taskCard()
             ],
           ),
         )));

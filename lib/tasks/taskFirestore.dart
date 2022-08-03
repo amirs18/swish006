@@ -1,23 +1,23 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class taskFirestore {
+class TaskFirestore {
   final String? name;
   final String? state;
   final String? description;
   final int? progress;
 
-  taskFirestore({
+  TaskFirestore({
     this.name,
     this.state,
     this.description,
     this.progress,
   });
-  factory taskFirestore.fromFriestore(
+  factory TaskFirestore.fromFriestore(
     DocumentSnapshot<Map<String, dynamic>> snapshot,
     SnapshotOptions? options,
   ) {
     final data = snapshot.data();
-    return taskFirestore(
+    return TaskFirestore(
       name: data?['name'],
       state: data?['state'],
       description: data?['description'],
@@ -33,20 +33,21 @@ class taskFirestore {
     };
   }
 
-  static Future<String> getdata(String user, String task) async {
+  static Future<String?> getName(String user, String task) async {
     final db = FirebaseFirestore.instance;
     final docRef = db
         .collection("users")
         .doc(user)
         .collection("user tasks")
         .withConverter(
-          fromFirestore: taskFirestore.fromFriestore,
-          toFirestore: (taskFirestore task_firestore, options) =>
+          fromFirestore: TaskFirestore.fromFriestore,
+          toFirestore: (TaskFirestore task_firestore, options) =>
               task_firestore.toFirestore(),
         )
         .doc(task);
     final docSnapshot = await docRef.get();
     final tf = docSnapshot.data();
-    return tf.toString();
+    final result = tf?.name;
+    return result;
   }
 }

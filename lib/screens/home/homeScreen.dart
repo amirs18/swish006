@@ -1,4 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:swish006/tasks/taskCard.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -8,37 +11,90 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _MyStatefulWidgetState extends State<HomeScreen> {
+  static final db = FirebaseFirestore.instance;
+  final docRef =
+      db.collection("users").doc(FirebaseAuth.instance.currentUser?.uid);
+  final Stream<QuerySnapshot> _usersStream = FirebaseFirestore.instance
+      .collection('users')
+      .doc('test')
+      .collection('user tasks')
+      .snapshots();
   int _selectedIndex = 1;
   static const TextStyle optionStyle = TextStyle(
     fontSize: 30,
     fontWeight: FontWeight.bold,
   );
-  static const List<Widget> _widgetOptions = <Widget>[
-    Padding(
-      padding: EdgeInsets.all(8.0),
-      child: Text(
-        'לוח תוצאות',
-        style: optionStyle,
-        textDirection: TextDirection.rtl,
-      ),
-    ),
-    Padding(
-      padding: EdgeInsets.all(8.0),
-      child: Text(
-        'בית, כאן יהיו התרגלים להיום, התקדמות וכאלה דברים',
-        style: optionStyle,
-        textDirection: TextDirection.rtl,
-      ),
-    ),
-    Padding(
-      padding: EdgeInsets.all(8.0),
-      child: Text(
-        'תרגילים כאן נכניס בנק תרגילים ואת "שיעורי הבית" שאתה נותן',
-        style: optionStyle,
-        textDirection: TextDirection.rtl,
-      ),
-    ),
-  ];
+  List<Widget> get _widgetOptions => <Widget>[
+        const Padding(
+          padding: EdgeInsets.all(8.0),
+          child: Text(
+            'לוח תוצאות',
+            style: optionStyle,
+            textDirection: TextDirection.rtl,
+          ),
+        ),
+        Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: FutureBuilder(
+                future: getNameFirestore,
+                builder:
+                    (BuildContext context, AsyncSnapshot<String?> snapshot) {
+                  return Text(
+                    snapshot.data.toString(),
+                    //'בית, כאן יהיו התרגלים להיום, התקדמות וכאלה דברים',
+                    style: optionStyle,
+                    textDirection: TextDirection.rtl,
+                  );
+                })),
+        stream()
+        //  const Padding(
+
+        //   padding: EdgeInsets.all(8.0),
+        //   child: Text(
+        //     'תרגילים כאן נכניס בנק תרגילים ואת "שיעורי הבית" שאתה נותן',
+        //     style: optionStyle,
+        //     textDirection: TextDirection.rtl,
+        //   ),
+
+        // ),
+      ];
+
+  Future<String> get getNameFirestore => docRef.get().then(
+        (DocumentSnapshot doc) {
+          final data = doc.data() as Map<String, dynamic>;
+          return data['name'];
+        },
+        onError: (e) => print("Error getting document: $e"),
+      );
+
+  StreamBuilder<QuerySnapshot<Object?>> stream() {
+    return StreamBuilder(
+        stream: _usersStream,
+        builder: (BuildContext context,
+            AsyncSnapshot<QuerySnapshot<Object?>> snapshot) {
+          if (snapshot.hasError) {
+            return const Text('Something went wrong');
+          }
+
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Text("Loading");
+          }
+
+          return ListView(
+            children: snapshot.data!.docs
+                .map((DocumentSnapshot document) {
+                  Map<String, dynamic> data =
+                      document.data()! as Map<String, dynamic>;
+                  return ListTile(
+                    title: Text(data['name']),
+                    subtitle: Text(data['state']),
+                  );
+                })
+                .toList()
+                .cast(),
+          );
+        });
+  }
 
   Future<void> _onItemTapped(int index) async {
     setState(() {
