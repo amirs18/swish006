@@ -62,7 +62,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       borderRadius: BorderRadius.circular(24))),
               onPressed: () async {
                 bool b;
-                if (b = await auth().registerWithEmail(
+                if (b = await Auth.registerWithEmail(
                     emailController.text, passwordController.text)) {
                   Navigator.pushNamed(context, '/home');
                 }
