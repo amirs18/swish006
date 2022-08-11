@@ -77,7 +77,7 @@ class _LogInPageState extends State<LogInPage> {
                     labelText: 'Enter Email',
                   ),
                   onChanged: ((value) => emailController = value)),
-              SizedBox(
+              const SizedBox(
                 height: 15,
                 child: Text(''),
               ),
@@ -95,7 +95,7 @@ class _LogInPageState extends State<LogInPage> {
               ),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                    primary: Colors.black,
+                    primary: Colors.orange,
                     minimumSize: const Size.fromHeight(50), // NEW
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(24))),
