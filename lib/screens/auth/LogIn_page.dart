@@ -25,7 +25,7 @@ class _LogInPageState extends State<LogInPage> {
     "state": "CA",
     "country": "USA"
   };
-  String loginE = '123';
+  String loginE = '';
 
   Future<UserCredential?> signInWithEmail(
       {required String email, required String password}) async {
