@@ -14,7 +14,7 @@ on:
     branches:
       - master
 jobs:
-  build_web:
+    build_web:
     name: Build Flutter (Web)
     runs-on: ubuntu-latest
     steps:
