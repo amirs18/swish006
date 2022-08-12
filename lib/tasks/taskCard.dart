@@ -27,8 +27,8 @@ class _TaskCardState extends State<TaskCard> {
       .collection("user tasks")
       .withConverter(
         fromFirestore: TaskFirestore.fromFriestore,
-        toFirestore: (TaskFirestore task_firestore, options) =>
-            task_firestore.toFirestore(),
+        toFirestore: (TaskFirestore taskFirestore, options) =>
+            taskFirestore.toFirestore(),
       )
       .doc("test");
 

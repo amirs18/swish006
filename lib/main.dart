@@ -10,7 +10,7 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -43,8 +43,8 @@ class MyApp extends StatelessWidget {
         initialRoute: '/home',
         routes: {
           '/': (context) => const FirstScreen(),
-          '/register': (context) => RegisterPage(),
-          '/login': (context) => LogInPage(),
+          '/register': (context) => const RegisterPage(),
+          '/login': (context) => const LogInPage(),
           '/home': (context) => const HomeScreen()
         });
   }

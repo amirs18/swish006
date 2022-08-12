@@ -70,7 +70,7 @@ class _MyStatefulWidgetState extends State<HomeScreen> {
           final data = doc.data() as Map<String, dynamic>;
           return data['name'];
         },
-        onError: (e) => print("Error getting document: $e"),
+        // onError: (e) => print("Error getting document: $e"),
       );
 
   StreamBuilder<QuerySnapshot<Object?>> stream() {
