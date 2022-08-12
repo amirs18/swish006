@@ -1,17 +1,18 @@
+// ignore_for_file: file_names
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:swish006/screens/auth/auth.dart';
 import 'package:swish006/tasks/taskCard.dart';
-
-import '../../tasks/taskFirestore.dart';
 
 class LogInPage extends StatefulWidget {
   static const String routeName = '/logIn';
 
+  const LogInPage({Key? key}) : super(key: key);
+
   @override
-  _LogInPageState createState() => _LogInPageState();
+  State<LogInPage> createState() => _LogInPageState();
 }
 
 class _LogInPageState extends State<LogInPage> {
@@ -54,10 +55,9 @@ class _LogInPageState extends State<LogInPage> {
     User? user;
     Map<String, String> userEmail;
 
-    String wrongPassword = "";
     return Scaffold(
         appBar: AppBar(
-          title: Text('login'),
+          title: const Text('Login'),
         ),
         body: Center(
             child: Padding(
@@ -148,7 +148,6 @@ class _LogInPageState extends State<LogInPage> {
                     ),
                     recognizer: TapGestureRecognizer()
                       ..onTap = () {
-                        print('');
                         //TODO add password reset
                       }),
               ]))

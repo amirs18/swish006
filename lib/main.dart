@@ -40,7 +40,7 @@ class MyApp extends StatelessWidget {
             primaryColor: Colors.orange,
             backgroundColor: Colors.orange,
             buttonTheme: const ButtonThemeData(colorScheme: colorscheme)),
-        initialRoute: '/',
+        initialRoute: '/home',
         routes: {
           '/': (context) => const FirstScreen(),
           '/register': (context) => RegisterPage(),

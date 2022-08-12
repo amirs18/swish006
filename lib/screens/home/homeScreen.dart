@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +18,7 @@ class _MyStatefulWidgetState extends State<HomeScreen> {
       db.collection("users").doc(FirebaseAuth.instance.currentUser?.uid);
   final Stream<QuerySnapshot> _usersStream = FirebaseFirestore.instance
       .collection('users')
-      .doc('test')
+      .doc('test') //TODO: add veribles
       .collection('user tasks')
       .snapshots();
   int _selectedIndex = 1;
@@ -46,7 +48,10 @@ class _MyStatefulWidgetState extends State<HomeScreen> {
                     textDirection: TextDirection.rtl,
                   );
                 })),
-        stream()
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: stream(),
+        )
         //  const Padding(
 
         //   padding: EdgeInsets.all(8.0),
@@ -112,6 +117,14 @@ class _MyStatefulWidgetState extends State<HomeScreen> {
       ),
       body: Center(
         child: _widgetOptions.elementAt(_selectedIndex),
+      ),
+      floatingActionButton: Visibility(
+        visible: (_selectedIndex == 2),
+        child: FloatingActionButton(
+          onPressed: () {},
+          backgroundColor: Colors.orange, //TODO: Add Task
+          child: const Icon(Icons.add),
+        ),
       ),
       bottomNavigationBar: btnNavBar(),
     );

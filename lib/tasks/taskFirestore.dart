@@ -1,3 +1,4 @@
+// ignore_for_file: file_names
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class TaskFirestore {
@@ -41,8 +42,8 @@ class TaskFirestore {
         .collection("user tasks")
         .withConverter(
           fromFirestore: TaskFirestore.fromFriestore,
-          toFirestore: (TaskFirestore task_firestore, options) =>
-              task_firestore.toFirestore(),
+          toFirestore: (TaskFirestore taskFirestore, options) =>
+              taskFirestore.toFirestore(),
         )
         .doc(task);
     final docSnapshot = await docRef.get();

@@ -1,12 +1,15 @@
+// ignore_for_file: file_names
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:swish006/screens/auth/auth.dart';
 
 class RegisterPage extends StatefulWidget {
   static const String routeName = '/register';
 
+  const RegisterPage({Key? key}) : super(key: key);
+
   @override
-  _RegisterPageState createState() => _RegisterPageState();
+  State<RegisterPage> createState() => _RegisterPageState();
 }
 
 class _RegisterPageState extends State<RegisterPage> {
@@ -16,14 +19,11 @@ class _RegisterPageState extends State<RegisterPage> {
   String registerE = '';
   Future<bool> registerWithEmail(String email, String password) async {
     try {
-      UserCredential userCredential =
-          await FirebaseAuth.instance.createUserWithEmailAndPassword(
+      await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
-      if (userCredential != null) {
-        return true;
-      }
+      return true;
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
         setState(() {
@@ -43,6 +43,7 @@ class _RegisterPageState extends State<RegisterPage> {
     return false;
   }
 
+  @override
   void dispose() {
     // Clean up the controller when the widget is disposed.
     passwordController.dispose();
@@ -54,7 +55,7 @@ class _RegisterPageState extends State<RegisterPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('Register'),
+          title: const Text('Register'),
         ),
         body: Padding(
           padding: const EdgeInsets.all(8.0),
@@ -95,8 +96,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(24))),
                 onPressed: () async {
-                  bool b;
-                  if (b = await registerWithEmail(
+                  if (await registerWithEmail(
                       emailController.text, passwordController.text)) {
                     Navigator.pushNamed(context, '/home');
                   } else {} //TODO
