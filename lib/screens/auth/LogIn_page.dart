@@ -79,7 +79,6 @@ class _LogInPageState extends State<LogInPage> {
                   onChanged: ((value) => emailController = value)),
               const SizedBox(
                 height: 15,
-                child: Text(''),
               ),
               TextField(
                   obscureText: true,
@@ -89,9 +88,16 @@ class _LogInPageState extends State<LogInPage> {
                     labelText: 'Enter password',
                   ),
                   onChanged: ((value) => passwordController = value)),
-              SizedBox(
+              const SizedBox(
                 height: 15,
-                child: Text(loginE),
+              ),
+              Expanded(
+                child: SizedBox(
+                  height: 15,
+                  child: Text(
+                    loginE,
+                  ),
+                ),
               ),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
@@ -145,6 +151,7 @@ class _LogInPageState extends State<LogInPage> {
                     recognizer: TapGestureRecognizer()
                       ..onTap = () {
                         print('');
+                        //TODO add password reset
                       }),
               ]))
             ],
