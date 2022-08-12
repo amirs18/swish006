@@ -65,6 +65,7 @@ class _MyStatefulWidgetState extends State<HomeScreen> {
       ];
 
   Future<String> get getNameFirestore => docRef.get().then(
+        //TODO: catch error
         (DocumentSnapshot doc) {
           final data = doc.data() as Map<String, dynamic>;
           return data['name'];
