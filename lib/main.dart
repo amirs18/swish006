@@ -17,17 +17,29 @@ class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
   static const String _title = 'Swish Basketball';
+  static const ColorScheme colorscheme = ColorScheme(
+      brightness: Brightness.light,
+      primary: Colors.orange,
+      onPrimary: Colors.orange,
+      secondary: Colors.black87,
+      onSecondary: Colors.black45,
+      error: Colors.red,
+      onError: Colors.red,
+      background: Colors.white70,
+      onBackground: Colors.white70,
+      surface: Colors.white,
+      onSurface: Colors.white);
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
         title: _title,
         theme: ThemeData(
-          appBarTheme: const AppBarTheme(backgroundColor: Colors.orange),
-          //buttonTheme: const ButtonThemeData(shape: RoundedRectangleBorder(),)),
-          primaryColor: Colors.orange,
-          backgroundColor: Colors.orange,
-        ),
+            appBarTheme: const AppBarTheme(backgroundColor: Colors.orange),
+            //buttonTheme: const ButtonThemeData(shape: RoundedRectangleBorder(),)),
+            primaryColor: Colors.orange,
+            backgroundColor: Colors.orange,
+            buttonTheme: const ButtonThemeData(colorScheme: colorscheme)),
         initialRoute: '/',
         routes: {
           '/': (context) => const FirstScreen(),
@@ -55,6 +67,7 @@ class FirstScreen extends StatelessWidget {
             children: [
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
+                  primary: Colors.orange,
                   minimumSize: const Size.fromHeight(50), // NEW
                 ),
                 onPressed: () => Navigator.pushNamed(context, '/login'),
@@ -65,6 +78,7 @@ class FirstScreen extends StatelessWidget {
               ),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
+                  primary: Colors.orange,
                   minimumSize: const Size.fromHeight(50), // NEW
                 ),
                 onPressed: () => Navigator.pushNamed(context, '/register'),
