@@ -147,8 +147,29 @@ class _LogInPageState extends State<LogInPage> {
                       color: Colors.orange,
                     ),
                     recognizer: TapGestureRecognizer()
-                      ..onTap = () {
-                        //TODO add password reset
+                      ..onTap = () async {
+                        try {
+                          await FirebaseAuth.instance
+                              .sendPasswordResetEmail(email: emailController);
+                          setState(() {
+                            loginE = 'Password reset email sentx.';
+                          });
+                        } on FirebaseAuthException catch (e) {
+                          if (e.code == 'invalid-email') {
+                            setState(() {
+                              loginE = 'Invalid email adress.';
+                            });
+                          } else if (e.code == 'missing-email') {
+                            setState(() {
+                              loginE = 'Please enter Email.';
+                            });
+                          } else {
+                            setState(() {
+                              loginE = e.message!;
+                            });
+                          }
+                          //TODO add password reset
+                        }
                       }),
               ]))
             ],
