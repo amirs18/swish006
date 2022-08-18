@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:swish006/tasks/taskFirestore.dart';
 
@@ -21,21 +22,23 @@ class _TaskCardState extends State<TaskCard> {
     progress: 69,
   );
 
-  final docRef = db
-      .collection('users')
-      .doc('test')
-      .collection("user tasks")
-      .withConverter(
-        fromFirestore: TaskFirestore.fromFriestore,
-        toFirestore: (TaskFirestore taskFirestore, options) =>
-            taskFirestore.toFirestore(),
-      )
-      .doc("test");
+  User? user;
 
   @override
   Widget build(BuildContext context) {
+    user = FirebaseAuth.instance.currentUser;
+    final docRef = db
+        .collection('users')
+        .doc(user?.uid)
+        .collection("user tasks")
+        .withConverter(
+          fromFirestore: TaskFirestore.fromFriestore,
+          toFirestore: (TaskFirestore taskFirestore, options) =>
+              taskFirestore.toFirestore(),
+        )
+        .doc("test");
     return FutureBuilder<String?>(
-        future: TaskFirestore.getName('test', 'test'),
+        future: TaskFirestore.getName(user?.uid, 'test'),
         builder: (BuildContext context, AsyncSnapshot<String?> snapshot) {
           return Padding(
             padding: const EdgeInsets.all(8.0),
@@ -43,6 +46,7 @@ class _TaskCardState extends State<TaskCard> {
               child: InkWell(
                 splashColor: Colors.blue.withAlpha(30),
                 onTap: () async {
+                  //TODO: fix this get task from DB
                   await docRef.set(_taskFirestore);
                   final docSnapshot = await docRef.get();
                   final tf = docSnapshot.data();
