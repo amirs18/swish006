@@ -4,7 +4,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:swish006/tasks/taskCard.dart';
 
 class LogInPage extends StatefulWidget {
   static const String routeName = '/logIn';
@@ -19,11 +18,6 @@ class _LogInPageState extends State<LogInPage> {
   String emailController = "";
   String passwordController = "";
   static final db = FirebaseFirestore.instance;
-  final city = <String, String>{
-    "name": "Los Angeles",
-    "state": "CA",
-    "country": "USA"
-  };
   String loginE = '';
 
   Future<UserCredential?> signInWithEmail(

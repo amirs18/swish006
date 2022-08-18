@@ -34,7 +34,8 @@ class TaskFirestore {
     };
   }
 
-  static Future<String?> getName(String user, String task) async {
+  static Future<String?> getName(String? user, String task) async {
+    if (user == null) return null;
     final db = FirebaseFirestore.instance;
     final docRef = db
         .collection("users")

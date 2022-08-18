@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:swish006/screens/auth/LogIn_page.dart';
 import 'package:swish006/screens/auth/Register_page.dart';
 import 'package:swish006/screens/home/homeScreen.dart';
+import 'package:swish006/tasks/addTask.dart';
 import 'firebase_options.dart';
 
 void main() async {
@@ -45,7 +46,8 @@ class MyApp extends StatelessWidget {
           '/': (context) => const FirstScreen(),
           '/register': (context) => const RegisterPage(),
           '/login': (context) => const LogInPage(),
-          '/home': (context) => const HomeScreen()
+          '/home': (context) => const HomeScreen(),
+          '/AddTask': (context) => const AddTask(),
         });
   }
 }
