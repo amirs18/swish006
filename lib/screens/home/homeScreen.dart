@@ -3,6 +3,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+// ignore: unused_import
 import 'package:swish006/tasks/taskCard.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -70,7 +71,7 @@ class _MyStatefulWidgetState extends State<HomeScreen> {
           final data = doc.data() as Map<String, dynamic>;
           return data['name'];
         },
-        // onError: (e) => print("Error getting document: $e"),
+        onError: (e) => print("Error getting document: $e"),
       );
 
   StreamBuilder<QuerySnapshot<Object?>> stream() {
